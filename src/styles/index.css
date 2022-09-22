@@ -7,6 +7,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+input[type="text"] {
+    padding: 10px;
+}
+button {
+    padding: 10px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -21,5 +28,82 @@ body {
 }
 
 .task-item {
+    width: 600px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: .5px solid #4c5b61;
+    background-color: #3d494e;
 }
+.task-item:first-child {
+    margin-top: 50px;
+}
+
+.task-item-done {
+    border-left: 3px solid green;
+}
+
+.task-item-ongoing {
+    border-left: 3px solid rgb(112, 35, 5);
+}
+
+.task-item p {
+    margin: 0px;
+    padding-left: 5px;
+    color: white;
+}
+
+.task-item-actions {
+    padding: 0;
+    margin: 0;
+}
+
+.edit-dialog {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 250px;
+    width: 250px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+}
+
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 170px;
+    margin-top: 10px;
+}
+
+.dialog-form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-task-btn {
+    background-color: #25373f;
+    border: 2px solid #25373f;
+    color: white;
+}
+
+.complete-btn {
+    background-color: rgb(51, 83, 0);
+    border: 2px solid rgb(51, 83, 0);
+    color: white;
+}
+
+.edit-btn {
+    background-color: rgb(5, 60, 112);
+    border: 2px solid rgb(5, 60, 112);
+    color: white;
+}
+
+.delete-btn {
+    background-color: rgb(112, 35, 5);
+    border: 2px solid rgb(112, 35, 5);
+    color: white;
+}
+

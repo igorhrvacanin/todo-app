@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, FC, FormEvent, useState} from 'react';
 import nextId from 'react-id-generator';
 import {ITask} from './interfaces';
 import TodoTask from './Components/TodoTask'
@@ -12,11 +12,20 @@ const App: FC = () => {
 		setTask(event.target.value);
 	}
 
-	const addTask = (): void => {
+	const addTask = (event: FormEvent<HTMLFormElement>): void => {
+		event.preventDefault();
 		let newTask: ITask = {id: nextId(), name: task, done: false};
 
 		setTodoList([newTask, ...todoList]);
 		setTask('');
+	}
+
+	const editTask = (id: string, name: string): void => {
+		setTodoList(todoList.map(task => {
+			if (task.id === id)
+				return {id, name, done: false};
+			return task;
+		}));
 	}
 
 	const deleteTask = (id: string): void => {
@@ -37,18 +46,27 @@ const App: FC = () => {
     <div className="container">
 		<div className="title">TODO App</div>
 		<div className="input-container">
-			<input
-				type="text"
-				placeholder="Insert the task..."
-				onChange={handleChange}
-				value={task}
-			/>
-			<button onClick={addTask}>Add task</button>
+			<form onSubmit={addTask}>
+				<input
+					required
+					type="text"
+					placeholder="Insert the task..."
+					onChange={handleChange}
+					value={task}
+				/>
+				<button className="add-task-btn" type="submit">Add task</button>
+			</form>
 		</div>
 		<div className="todo-list-items">
 			{
 				todoList.map((task: ITask, key: number) => {
-					return <TodoTask key={key} task={task} deleteTask={deleteTask} completeTask={completeTask}></TodoTask>
+					return <TodoTask
+							key={key}
+							task={task}
+							deleteTask={deleteTask}
+							completeTask={completeTask}
+							editTask={editTask}
+						></TodoTask>
 				})
 			}
 		</div>
