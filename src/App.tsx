@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, FormEvent, useState, useEffect} from 'react';
 import nextId from 'react-id-generator';
 import {ITask} from './interfaces';
-import TodoTask from './Components/TodoTask'
+import TodoTask from './components/TodoTask'
 
 const App: FC = () => {
 
