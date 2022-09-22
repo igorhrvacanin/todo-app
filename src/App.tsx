@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FC, FormEvent, useState, useEffect} from 'react';
 import nextId from 'react-id-generator';
 import {ITask} from './interfaces';
 import TodoTask from './Components/TodoTask'
@@ -6,7 +6,11 @@ import TodoTask from './Components/TodoTask'
 const App: FC = () => {
 
 	const [task, setTask] = useState<string>('');
-	const [todoList, setTodoList] = useState<ITask[]>([]);
+	const [todoList, setTodoList] = useState<ITask[]>(window.localStorage.getItem('todoItems') ? JSON.parse(window.localStorage.getItem('todoItems')!) : []);
+
+	useEffect(() => {
+		return window.localStorage.setItem('todoItems', JSON.stringify(todoList));
+	}, [todoList]);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		setTask(event.target.value);
